@@ -21,11 +21,11 @@ namespace dotnet.rpg.Data
         public async Task<ServiceResponse<int>> Register(User user, string password)
         {
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
-            
+
             user.HashPass = passwordHash;
             user.PasswordSalt = passwordSalt;
 
-            _context.Users.Add(user);
+
             await _context.SaveChangesAsync();
             var serviceResponse = new ServiceResponse<int>();
             serviceResponse.Data = user.Id;
